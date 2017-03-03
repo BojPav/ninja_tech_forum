@@ -1,3 +1,9 @@
 body {
 background-color: #c1c1c1;
 }
+
+.jumbotron {
+background-image: url("http://www.desktopimages.org/pictures/2012/1208/1/orig_147365.jpg");
+background-repeat: no-repeat;
+color: white;
+}

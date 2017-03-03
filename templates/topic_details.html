@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} {{ topic.title }} {% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><strong>Title: </strong>{{ topic.title }}</h2>
+            </div>
+
+            <div class="panel-body">
+                <h4><strong>Author: </strong>{{ topic.author_email }}</h4>
+                <h5>{{ topic.content }}</h5>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2 text-center">
+        <a href="/" class="btn btn-default" role="button"> Back to Main page</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

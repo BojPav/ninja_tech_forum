@@ -27,34 +27,44 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Ninja Tech Forum</a>
+          <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-console"></span> Ninja Tech Forum</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/about">About</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="/about"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+
+              <!-- Checks if user is logged in  -->
+              {% if user %}
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{user.email()}}</a></li>
+                <li><a href="/topic/create"><span class="glyphicon glyphicon-pencil"></span> Create Topic</a></li>
+                <li><a href="{{logout_url}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              {% else %}
+                <li><a href="{{login_url}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
 
+        <!-- Cookies info alert -->
         {% if not cookies %}
-
         <div class="alert alert-info" role="alert">
             <p>Hello, Ninja Tech forum uses cookies for your better experience. Do you agree with that ?</p>
             <form method="post" action="/set-cookie">
                 <button class="btn btn-primary btn-xs"> I Agree</button>
             </form>
         </div>
-
         {% endif %}
 
+    </div>
+
+        <div class="container">
         {% block content %}
 
         {% endblock content %}
-    </div>
+        </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
