@@ -6,20 +6,59 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title"><strong>Title: </strong>{{ topic.title }}</h2>
+            <div class="panel-heading panel-heading-custom">
+                <h2 class="panel-title"><strong>Title: </strong>{{ topic.title }} &nbsp; by
+                    <strong>{{ topic.author_email }}</strong> &nbsp; created
+                    {{ topic.created.strftime("%d.%m.%Y at %H:%M") }}h</h2>
             </div>
 
             <div class="panel-body">
-                <h4><strong>Author: </strong>{{ topic.author_email }}</h4>
-                <h5>{{ topic.content }}</h5>
+                <p>{{ topic.content }}</p>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2 text-center">
-        <a href="/" class="btn btn-default" role="button"> Back to Main page</a>
+
+        <!-- Listing comments in related topic -->
+        {% for comment in comments %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-comments-custom">
+                        <h3 class="panel-title"><strong>{{ comment.author_email }}</strong> on
+                            {{ comment.created.strftime("%d.%m.%Y at %H:%M") }}h</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{ comment.content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Add new comment panel -->
+        <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading ">Add new comment</div>
+                <div class="panel-body">
+                    <form method="post" action="/topic/{{topic.key.id()}}/comment/add">
+                        <!-- CSRF protection -->
+                        <input type="hidden" value="{{ csrf_token }}" name="csrf_token">
+                        <div class="form-group">
+                            <small><em>I have CSRF protection :)</em></small>
+                            <textarea name="comment-text" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-ok"></span> Submit your comment</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
+        <!-- Back button -->
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <a href="/" class="btn btn-default" role="button"> Back to Main page</a>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

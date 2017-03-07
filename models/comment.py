@@ -1,5 +1,6 @@
 from google.appengine.ext import ndb
 
+
 class Comment(ndb.Model):
     content = ndb.TextProperty()
     author_email = ndb.StringProperty()

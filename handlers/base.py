@@ -45,9 +45,9 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        topics = Topic.query(Topic.deleted == False).fetch()
+        topics = Topic.query(Topic.deleted == False).order(Topic.created).fetch() # fetch topics from datastore
 
-        params = {"topics": topics}
+        params = {"topics": topics} # send topics to html
 
         return self.render_template("main.html", params=params)
 
@@ -59,5 +59,5 @@ class AboutHandler(BaseHandler):
 
 class CookieHandler(BaseHandler):
     def post(self):
-        self.response.set_cookie(key="ninja-forum-cookie", value="accepted")
+        self.response.set_cookie(key="ninja-forum-cookie", value="accepted") # save cookie
         return self.redirect_to("main-page")
