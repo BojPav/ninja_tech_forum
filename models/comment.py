@@ -1,4 +1,5 @@
 from google.appengine.ext import ndb
+from google.appengine.api import taskqueue
 
 
 class Comment(ndb.Model):
@@ -9,3 +10,15 @@ class Comment(ndb.Model):
     created = ndb.DateTimeProperty(auto_now_add=True)
     updated = ndb.DateTimeProperty(auto_now=True)
     deleted = ndb.BooleanProperty(default=False)
+
+    @classmethod
+    def create(cls, content, user, topic):
+        comment = Comment(content=content, author_email=user.email(), topic_id=topic.key.id(), topic_title=topic.title)
+        comment.put()
+
+        #  background task for sending e-mail
+        taskqueue.add(url="/task/email-new-comment", params={"topic_author_email": topic.author_email,
+                                                             "topic_title": topic.title,
+                                                             "topic_id": topic.key.id()})
+
+        return comment

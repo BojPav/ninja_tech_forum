@@ -3,17 +3,29 @@
 {% block title %} {{ topic.title }} {% endblock title %}
 
 {% block content %}
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading panel-heading-custom">
                 <h2 class="panel-title"><strong>Title: </strong>{{ topic.title }} &nbsp; by
-                    <strong>{{ topic.author_email }}</strong> &nbsp; created
+                    <strong>{{ topic.author_email }}</strong> &nbsp; created at
                     {{ topic.created.strftime("%d.%m.%Y at %H:%M") }}h</h2>
+
+                    {% if user %}
+                    {% if topic.author_email == user.email() or user.admin %}
+                    <form action="/topic/{{ topic.key.id() }}/delete" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                        <span class="pull-right"><button class="btn btn-xs btn-danger">Delete topic</button></span>
+                    </form>
+
+                    {% endif %}
+                {% endif %}
             </div>
 
             <div class="panel-body">
                 <p>{{ topic.content }}</p>
+
+
             </div>
         </div>
 
@@ -38,13 +50,12 @@
         <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading ">Add new comment</div>
+                <div class="panel-heading panel-heading-comments-custom">Add new comment</div>
                 <div class="panel-body">
                     <form method="post" action="/topic/{{topic.key.id()}}/comment/add">
                         <!-- CSRF protection -->
                         <input type="hidden" value="{{ csrf_token }}" name="csrf_token">
                         <div class="form-group">
-                            <small><em>I have CSRF protection :)</em></small>
                             <textarea name="comment-text" class="form-control" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-default">

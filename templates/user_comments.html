@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}User comments{% endblock title %}
+
+{% block content %}
+
+<!-- Listing comments for current user -->
+        {% for comment in user_comments %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-comments-custom">
+                        <h3 class="panel-title"><strong>{{ comment.author_email }}</strong> on
+                            {{ comment.created.strftime("%d.%m.%Y at %H:%M") }}h in Topic: <strong>{{ comment.topic_title }}</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{ comment.content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+{% endblock content %}
