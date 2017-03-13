@@ -15,13 +15,13 @@ class TopicCreateHandler(BaseHandler):
         # check if user is logged in
         user = users.get_current_user()
         if not user:
-            return self.write("Please login, not allowed for unregistered users to post a topic...")
+            return self.write("Please login, not allowed for unregistered users to post a topic...!")
 
         # Add new topic
         topic_title = self.request.get("title")
         topic_content = self.request.get("content")
 
-        # if user logged in - creating new topic and saves in Datastore
+        # if user logged in - create new topic and save in Datastore
         new_topic = Topic(title=topic_title, content=topic_content, author_email=user.email())
         new_topic.put()
 
@@ -31,6 +31,7 @@ class TopicCreateHandler(BaseHandler):
 class TopicDetailsHandler(BaseHandler):
     def get(self, topic_id):
         topic = Topic.get_by_id(int(topic_id))  # get topic
+
         comments = Comment.query(Comment.topic_id == topic.key.id(), Comment.deleted == False).order(Comment.created).fetch()
 
         params = {"topic": topic, "comments": comments}

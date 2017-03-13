@@ -18,6 +18,6 @@ class CommentAdd(BaseHandler):
         text = self.request.get("comment-text")
         topic = Topic.get_by_id(int(topic_id))
 
-        Comment.create(content=text, user=user, topic=topic)
+        Comment.create(content=text, author=user.email(), topic=topic)
 
         return self.redirect_to("topic-details", topic_id=topic.key.id())

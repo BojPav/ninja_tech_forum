@@ -61,3 +61,16 @@ color: #fff;
     background-color: #626466;
     color: white;
 }
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    height: 35px;
+    background-color: #404142;
+    color: white;
+    text-align: center;
+}
