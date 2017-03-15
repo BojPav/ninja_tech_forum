@@ -21,3 +21,15 @@ class CommentAdd(BaseHandler):
         Comment.create(content=text, author=user.email(), topic=topic)
 
         return self.redirect_to("topic-details", topic_id=topic.key.id())
+
+
+class CommentDelete(BaseHandler):
+    @validate_csrf
+    def post(self, comment_id):
+        comment = Comment.get_by_id(int(comment_id))
+        user = users.get_current_user()
+
+        if comment.author_email == user.email() or users.is_current_user_admin():
+            Comment.delete(comment)
+
+        self.redirect_to("topic-details", topic_id=comment.topic_id)

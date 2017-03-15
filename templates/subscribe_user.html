@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Subscribe page{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default ">
+        <div class="panel-heading panel-heading-comments-custom">
+            <h3 class="panel-title">Subscribe and receive an email each day about the hottest topics on the Ninja tech forum.</h3>
+        </div>
+        <div class="panel-body">
+        <form method="post" action="/topic-subscribe">
+            <!-- Hidden input form for creating CSRF code -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <!-- Standard visible input form -->
+            <div class="form-group">
+                <label>Your E-mail:</label>
+                <input class="form-control" name="subscription_email" type="email" required>
+            </div>
+            <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Subscribe</button>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock content %}

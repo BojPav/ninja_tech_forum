@@ -33,6 +33,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
+              <li><a href="/topic-subscribe"><span class="glyphicon glyphicon-plus-sign"></span> Subscribe</a></li>
             <li><a href="/about"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
 
               <!-- Checks if user is logged in  -->
@@ -42,6 +43,8 @@
                         <span class="glyphicon glyphicon-user"></span> {{ user.email() }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/user-comments">My Comments</a></li>
+
+
                     </ul>
                 </li>
                 <li><a href="/topic/create"><span class="glyphicon glyphicon-pencil"></span> Create Topic</a></li>

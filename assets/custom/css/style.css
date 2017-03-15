@@ -35,6 +35,10 @@ background: #626466;
 color: #fff;
 }
 
+.panel-title {
+font-size: 15px;
+}
+
 .table {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -73,4 +77,12 @@ color: #fff;
     background-color: #404142;
     color: white;
     text-align: center;
+}
+
+.modal-title {
+    color: black;
+}
+
+.modal-body {
+    color: black;
 }

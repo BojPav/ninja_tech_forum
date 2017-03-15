@@ -1,0 +1,15 @@
+cron:
+- description: Delete topics older than 1 month
+  url: /cron/delete-topics
+  schedule: every sunday 09:00
+  timezone: Europe/Ljubljana
+
+- description: Send new topics to subscribers posted 24 hours ago
+  url: /cron/subs-topics
+  schedule: every day 08:00
+  timezone: Europe/Ljubljana
+
+- description: Delete comments older than 1 month
+  url: /cron/delete-comments
+  schedule: every sunday 10:00
+  timezone: Europe/Ljubljana
