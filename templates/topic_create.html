@@ -2,6 +2,32 @@
 
 {% block title %}Create New Topic{% endblock title %}
 
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        var numberOne = Math.floor((Math.random() * 10) + 1);
+        var numberTwo = Math.floor((Math.random() * 10) + 1);
+
+        var numSum = numberOne + numberTwo;
+
+        $("#add-topic-sum-label").text("What is the sum of " + numberOne + " and " + numberTwo + " ? (Security question) ");
+
+        var addTopicButton = $("#add-topic-button");
+        var addTopicSum = $("#add-topic-sum");
+
+        addTopicButton.click(function(e) {
+            if (addTopicSum.val() === numSum.toString()){
+                addTopicButton.hide();
+                console.log("Juhuuuuuu!");
+            } else {
+                alert("You entered a wrong answer! Try again...");
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+{% endblock scripts %}
+
 {% block content %}
 
 <div class="row">
@@ -17,13 +43,17 @@
             <!-- Standard visible input form -->
                 <div class="form-group">
                     <label>Title</label>
-                        <input class="form-control" name="title" required>
+                        <input type="text" class="form-control" name="title" id="add-topic-title" required>
                     <div class="form-group">
                         <label>Content</label>
                     <textarea class="form-control" name="content" rows="5" required></textarea>
                 </div>
+                    <div class="form-group">
+                <label id="add-topic-sum-label">What is the sum of 2 and 8? (Security question)</label>
+                <input type="text" class="form-control" id="add-topic-sum" required>
             </div>
-            <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+            </div>
+            <button type="submit" class="btn btn-default" id="add-topic-button"><span class="glyphicon glyphicon-ok"></span> Submit</button>
         </form>
         </div>
     </div>
