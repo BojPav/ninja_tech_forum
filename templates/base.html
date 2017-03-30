@@ -12,6 +12,10 @@
     <!-- Bootstrap -->
     <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="/assets/custom/css/style.css" rel="stylesheet">
+
+    <!-- Lightbox -->
+    <link href="/assets/lightbox/css/lightbox.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -34,7 +38,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
               <li><a href="/topic-subscribe"><span class="glyphicon glyphicon-plus-sign"></span> Subscribe</a></li>
-            <li><a href="/about"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+              <li><a href="/about"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+              <li><a href="/gallery"><span class="glyphicon glyphicon-picture"></span> Gallery</a></li>
 
               <!-- Checks if user is logged in  -->
               {% if user %}
@@ -82,6 +87,9 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/assets/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Lightbox JS -->
+    <script src="/assets/lightbox/js/lightbox.js"></script>
 
     {% block scripts %}
     {% endblock scripts %}
